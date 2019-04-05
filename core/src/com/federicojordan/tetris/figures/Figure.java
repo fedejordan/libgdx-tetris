@@ -13,4 +13,10 @@ public class Figure {
             square.draw(batch);
         }
     }
+
+    public void moveDown() {
+        for (Square square : squares) {
+            square.moveDown();
+        }
+    }
 }

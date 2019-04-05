@@ -14,16 +14,16 @@ import java.util.Random;
 
 public class FigureCreator {
 
-    static Figure createRandom() {
+    static Figure createRandom(int x, int y) {
         Random rand = new Random();
         Color color = randomColor();
 
         int n = rand.nextInt(5);
-        return Arrays.asList(new BarFigure(0, 0, color),
-                new BoxFigure(0, 0, color),
-                new ReversedZFigure(0, 0, color),
-                new TFigure(0, 0, color),
-                new ZFigure(0, 0, color)).get(n);
+        return Arrays.asList(new BarFigure(x, y, color),
+                new BoxFigure(x, y, color),
+                new ReversedZFigure(x, y, color),
+                new TFigure(x, y, color),
+                new ZFigure(x, y, color)).get(n);
     }
 
     private static Color randomColor() {

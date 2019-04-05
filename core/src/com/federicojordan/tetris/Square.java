@@ -12,6 +12,7 @@ public class Square {
     private int x;
     private int y;
     private Texture texture;
+    private String TAG = "Square";
 
     public Square(int x, int y, Color color) {
         this.x = x;
@@ -27,5 +28,10 @@ public class Square {
         float squareLength = GameConfiguration.screenWidth()/GameConfiguration.verticalLinesCount();
 
         batch.draw(texture, x*squareLength, y*squareLength, squareLength, squareLength);
+    }
+
+    public void moveDown() {
+        y-=1;
+        Gdx.app.log(TAG, "moveDown()");
     }
 }
