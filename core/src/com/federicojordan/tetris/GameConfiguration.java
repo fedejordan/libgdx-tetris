@@ -14,10 +14,14 @@ public class GameConfiguration {
     }
 
     static int verticalLinesCount() {
-        return 30;
+        return 15;
     }
 
     static float squareLenght() {
         return screenWidth()/verticalLinesCount();
+    }
+
+    static float velocity() {
+        return 0.5f;
     }
 }

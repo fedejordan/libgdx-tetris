@@ -3,7 +3,6 @@ package com.federicojordan.tetris;
 public class GameTimeUpdater {
     private long currentTimeMillis;
     GameTimeUpdaterListener listener;
-    private float DELTA = 0.1f;
 
     public GameTimeUpdater(GameTimeUpdaterListener listener) {
         this.listener = listener;
@@ -12,7 +11,7 @@ public class GameTimeUpdater {
     void render() {
         long newTimeMillis = System.currentTimeMillis();
         float frameTimeSeconds = (newTimeMillis - currentTimeMillis) / 1000f;
-        if(frameTimeSeconds >= DELTA) {
+        if(frameTimeSeconds >= GameConfiguration.velocity()) {
             currentTimeMillis = newTimeMillis;
             listener.shouldUpdate();
         }

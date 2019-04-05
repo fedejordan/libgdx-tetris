@@ -45,7 +45,7 @@ public class LibGDXTetris extends ApplicationAdapter {
 				if(screenY < GameConfiguration.screenHeight() / 4) {
 					tryToRotate();
 				} else if(screenY > GameConfiguration.screenHeight() / 4 * 3) {
-					currentFigure.moveDown();
+					tryToMoveDown();
 				} else if(screenX < GameConfiguration.screenWidth() / 2) {
 					tryToMoveLeft();
 				} else {
@@ -56,6 +56,13 @@ public class LibGDXTetris extends ApplicationAdapter {
 			}
 
 		});
+	}
+
+	private void tryToMoveDown() {
+		boolean shouldNotKeepMoving = figureIsTouchingADeadSquareAtBottom() || figureIsTouchingBottom();
+		if(shouldNotKeepMoving == false) {
+			currentFigure.moveDown();
+		}
 	}
 
 	private void tryToRotate() {
