@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.federicojordan.tetris.figures.Figure;
 
+import java.util.ArrayList;
+
 
 public class LibGDXTetris extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -13,6 +15,7 @@ public class LibGDXTetris extends ApplicationAdapter {
 	private Figure currentFigure;
 	private String TAG = "LibGDXTetris";
 	private GameTimeUpdater gameTimeUpdater;
+	private ArrayList<Square> deadSquares;
 
 	@Override
 	public void create () {
@@ -22,10 +25,28 @@ public class LibGDXTetris extends ApplicationAdapter {
 			@Override
 			public void shouldUpdate() {
 				currentFigure.moveDown();
+				checkCurrentFigure();
 			}
 		});
 
 		createFigure();
+		deadSquares = new ArrayList<Square>();
+	}
+
+	private void checkCurrentFigure() {
+		if(figureIsTouchingADeadSquare() || figureIsTouchingBottom()) {
+			addDeadSquaresFromCurrentFigure();
+			createFigure();
+		}
+	}
+
+	private boolean figureIsTouchingBottom() {
+		for (Square square : currentFigure.getSquares()) {
+			if(square.getY() == 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void createFigure() {
@@ -33,6 +54,21 @@ public class LibGDXTetris extends ApplicationAdapter {
 		int y = matrix.numberOfRows;
 		Gdx.app.log(TAG, "x: " + x + " y: " + y);
 		currentFigure = FigureCreator.createRandom(x, y);
+	}
+
+	private boolean figureIsTouchingADeadSquare() {
+		for (Square deadSquare : deadSquares) {
+			if(currentFigure.isTouchingBottom(deadSquare)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void addDeadSquaresFromCurrentFigure() {
+		for (Square square : currentFigure.getSquares()) {
+			deadSquares.add(square);
+		}
 	}
 
 	@Override
@@ -44,7 +80,14 @@ public class LibGDXTetris extends ApplicationAdapter {
 		matrix.draw(batch);
 
 		drawFigure();
+		drawDeadSquares();
 		batch.end();
+	}
+
+	private void drawDeadSquares() {
+		for (Square deadSquare : deadSquares) {
+			deadSquare.draw(batch);
+		}
 	}
 
 	private void drawFigure() {

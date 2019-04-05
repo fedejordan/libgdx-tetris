@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Square {
 
-
     private int x;
     private int y;
     private Texture texture;
@@ -33,5 +32,25 @@ public class Square {
     public void moveDown() {
         y-=1;
         Gdx.app.log(TAG, "moveDown()");
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public boolean isTouching(Square square) {
+        boolean isTouchingLeft =    square.getX() == x - 1 && square.getY() == y;
+        boolean isTouchingTop =     square.getY() == y + 1 && square.getX() == x;
+        boolean isTouchingRight =   square.getX() == x + 1 && square.getY() == y;
+        boolean isTouchingBottom =  square.getY() == y - 1 && square.getX() == x;
+        return isTouchingLeft || isTouchingTop || isTouchingRight || isTouchingBottom;
+    }
+
+    public boolean isTouchingBottom(Square square) {
+        return square.getY() == y - 1 && square.getX() == x;
     }
 }

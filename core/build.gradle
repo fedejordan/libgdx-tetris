@@ -9,3 +9,7 @@ sourceSets.main.java.srcDirs = [ "src/" ]
 eclipse.project {
     name = appName + "-core"
 }
+
+dependencies {
+    implementation 'com.mobidevelop.robovm:robovm-rt:2.3.6'
+}
