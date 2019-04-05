@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.federicojordan.tetris.figures.Figure;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class LibGDXTetris extends ApplicationAdapter {
@@ -36,7 +37,46 @@ public class LibGDXTetris extends ApplicationAdapter {
 	private void checkCurrentFigure() {
 		if(figureIsTouchingADeadSquare() || figureIsTouchingBottom()) {
 			addDeadSquaresFromCurrentFigure();
+			tryToDeleteCompletedLine();
 			createFigure();
+		}
+	}
+
+	private void tryToDeleteCompletedLine() {
+		Gdx.app.log(TAG, "tryToDeleteCompletedLine()");
+		boolean aLineWasDeleted = false;
+		ArrayList<Square> squaresToDelete = new ArrayList();
+		for(int i=0;i<matrix.numberOfRows;i++) {
+			ArrayList<Square> selectedSquares = new ArrayList();
+			for(int j=0;j<matrix.numberOfColumns;j++) {
+				for(Square deadSquare: deadSquares) {
+
+					if(deadSquare.getY() == i && deadSquare.getX() == j) {
+						//Gdx.app.log(TAG, "Found square x: " + j + "y: " + i);
+						selectedSquares.add(deadSquare);
+					}
+				}
+			}
+
+			if(selectedSquares.size() == matrix.numberOfColumns) {
+				Gdx.app.log(TAG, "There is a line on y = " + i);
+				deadSquares.removeAll(selectedSquares);
+
+				// Move the top ones to bottom
+				for(Square moveToSquare: deadSquares) {
+					if(moveToSquare.getY() > i) {
+						moveToSquare.moveDown();
+					}
+				}
+
+				aLineWasDeleted = true;
+			} else {
+				Gdx.app.log(TAG, "No lines");
+			}
+		}
+
+		if(aLineWasDeleted) {
+			tryToDeleteCompletedLine();
 		}
 	}
 
@@ -50,10 +90,10 @@ public class LibGDXTetris extends ApplicationAdapter {
 	}
 
 	private void createFigure() {
-		int x = matrix.numberOfColumns / 2;
+		Random rand = new Random();
+		int row = rand.nextInt(matrix.numberOfColumns);
 		int y = matrix.numberOfRows;
-		Gdx.app.log(TAG, "x: " + x + " y: " + y);
-		currentFigure = FigureCreator.createRandom(x, y);
+		currentFigure = FigureCreator.createRandom(row, y);
 	}
 
 	private boolean figureIsTouchingADeadSquare() {

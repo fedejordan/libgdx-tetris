@@ -5,6 +5,7 @@ import com.federicojordan.tetris.figures.BarFigure;
 import com.federicojordan.tetris.figures.BoxFigure;
 import com.federicojordan.tetris.figures.Figure;
 import com.federicojordan.tetris.figures.ReversedZFigure;
+import com.federicojordan.tetris.figures.SmallBoxFigure;
 import com.federicojordan.tetris.figures.TFigure;
 import com.federicojordan.tetris.figures.ZFigure;
 

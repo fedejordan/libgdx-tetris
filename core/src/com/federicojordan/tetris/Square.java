@@ -31,7 +31,6 @@ public class Square {
 
     public void moveDown() {
         y-=1;
-        Gdx.app.log(TAG, "moveDown()");
     }
 
     public int getX() {

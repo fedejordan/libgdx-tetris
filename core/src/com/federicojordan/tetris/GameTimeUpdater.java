@@ -3,7 +3,7 @@ package com.federicojordan.tetris;
 public class GameTimeUpdater {
     private long currentTimeMillis;
     GameTimeUpdaterListener listener;
-    private float DELTA = 0.25f;
+    private float DELTA = 0.001f;
 
     public GameTimeUpdater(GameTimeUpdaterListener listener) {
         this.listener = listener;
