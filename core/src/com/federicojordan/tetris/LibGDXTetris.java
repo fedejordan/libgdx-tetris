@@ -117,13 +117,21 @@ public class LibGDXTetris extends ApplicationAdapter {
 		if(shouldNotKeepMoving) {
 			addDeadSquaresFromCurrentFigure();
 			tryToDeleteCompletedLine();
+			checkFinishedGame();
 			createFigure();
+		}
+	}
+
+	private void checkFinishedGame() {
+		for(Square deadSquare: deadSquares) {
+			if(deadSquare.getY() == matrix.numberOfRows-1 && deadSquare.getX() == matrix.numberOfColumns / 2 -1) {
+				deadSquares = new ArrayList();
+			}
 		}
 	}
 
 	private void tryToDeleteCompletedLine() {
 		boolean aLineWasDeleted = false;
-		ArrayList<Square> squaresToDelete = new ArrayList();
 		for(int i=0;i<matrix.numberOfRows;i++) {
 			ArrayList<Square> selectedSquares = new ArrayList();
 			for(int j=0;j<matrix.numberOfColumns;j++) {
