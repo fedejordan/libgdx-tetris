@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Square {
 
+    private final Texture blackTexture;
+    private final float margin;
     private int x;
     private int y;
     private Texture texture;
@@ -22,13 +24,19 @@ public class Square {
         Pixmap squarePixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
         squarePixmap.setColor(color);
         squarePixmap.fill();
+        Pixmap blackPixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
+        blackPixmap.setColor(Color.BLACK);
+        blackPixmap.fill();
         this.texture = new Texture(squarePixmap);
+        this.blackTexture = new Texture(blackPixmap);
+        this.margin = 5.0f;
     }
 
     public void draw(Batch batch) {
         float squareLength = GameConfiguration.screenWidth()/GameConfiguration.verticalLinesCount();
 
-        batch.draw(texture, x*squareLength, y*squareLength, squareLength, squareLength);
+        batch.draw(blackTexture, x*squareLength, y*squareLength, squareLength, squareLength);
+        batch.draw(texture, x*squareLength + margin, y*squareLength + margin, squareLength - margin * 2, squareLength - margin * 2);
     }
 
     public void moveDown() {

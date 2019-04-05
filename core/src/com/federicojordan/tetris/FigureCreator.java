@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.federicojordan.tetris.figures.BarFigure;
 import com.federicojordan.tetris.figures.BoxFigure;
 import com.federicojordan.tetris.figures.Figure;
+import com.federicojordan.tetris.figures.LFigure;
+import com.federicojordan.tetris.figures.ReversedLFigure;
 import com.federicojordan.tetris.figures.ReversedZFigure;
 import com.federicojordan.tetris.figures.SmallBoxFigure;
 import com.federicojordan.tetris.figures.TFigure;
@@ -19,12 +21,14 @@ public class FigureCreator {
         Random rand = new Random();
         Color color = randomColor();
 
-        int n = rand.nextInt(5);
+        int n = rand.nextInt(7);
         return Arrays.asList(new BarFigure(x, y, color),
                 new BoxFigure(x, y, color),
                 new ReversedZFigure(x, y, color),
                 new TFigure(x, y, color),
-                new ZFigure(x, y, color)).get(n);
+                new ZFigure(x, y, color),
+                new LFigure(x, y, color),
+                new ReversedLFigure(x, y, color)).get(n);
     }
 
     private static Color randomColor() {
