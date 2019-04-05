@@ -24,10 +24,10 @@ public class Square {
         Pixmap squarePixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
         squarePixmap.setColor(color);
         squarePixmap.fill();
+        this.texture = new Texture(squarePixmap);
         Pixmap blackPixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
         blackPixmap.setColor(Color.BLACK);
         blackPixmap.fill();
-        this.texture = new Texture(squarePixmap);
         this.blackTexture = new Texture(blackPixmap);
         this.margin = 5.0f;
     }
@@ -81,5 +81,13 @@ public class Square {
 
     public Color getColor() {
         return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+        Pixmap squarePixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
+        squarePixmap.setColor(color);
+        squarePixmap.fill();
+        this.texture = new Texture(squarePixmap);
     }
 }

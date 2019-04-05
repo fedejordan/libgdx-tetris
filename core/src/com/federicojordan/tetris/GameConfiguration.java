@@ -24,4 +24,8 @@ public class GameConfiguration {
     static float velocity() {
         return 0.5f;
     }
+
+    public static boolean shouldSetGrayColorWhenDead() {
+        return false;
+    }
 }
