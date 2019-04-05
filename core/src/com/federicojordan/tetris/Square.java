@@ -52,4 +52,20 @@ public class Square {
     public boolean isTouchingBottom(Square square) {
         return square.getY() == y - 1 && square.getX() == x;
     }
+
+    public void moveRight() {
+        x+=1;
+    }
+
+    public void moveLeft() {
+        x-=1;
+    }
+
+    public boolean isTouchingRight(Square square) {
+        return square.getX() == x + 1 && square.getY() == y;
+    }
+
+    public boolean isTouchingLeft(Square square) {
+        return square.getX() == x - 1 && square.getY() == y;
+    }
 }

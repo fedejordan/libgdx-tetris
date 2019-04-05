@@ -15,19 +15,9 @@ public class Figure {
     }
 
     public void moveDown() {
-        int minX = squares.get(0).getX();
-        int minY = squares.get(0).getY();
-        int maxX = squares.get(0).getX();
-        int maxY = squares.get(0).getY();
-
         for (Square square : squares) {
             square.moveDown();
-            if(square.getX() < minX) { minX = square.getX(); }
-            if(square.getY() < minY) { minY = square.getY(); }
-            if(square.getX() > maxX) { maxX = square.getX(); }
-            if(square.getY() > maxY) { maxY = square.getY(); }
         }
-
     }
 
     public ArrayList<Square> getSquares() {
@@ -37,6 +27,36 @@ public class Figure {
     public boolean isTouchingBottom(Square square) {
         for (Square square1 : squares) {
             if(square1.isTouchingBottom(square)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void moveLeft() {
+        for (Square square : squares) {
+            square.moveLeft();
+        }
+    }
+
+    public void moveRight() {
+        for (Square square : squares) {
+            square.moveRight();
+        }
+    }
+
+    public boolean isTouchingRight(Square deadSquare) {
+        for (Square square1 : squares) {
+            if(square1.isTouchingRight(deadSquare)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isTouchingLeft(Square deadSquare) {
+        for (Square square1 : squares) {
+            if(square1.isTouchingLeft(deadSquare)) {
                 return true;
             }
         }
