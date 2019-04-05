@@ -14,7 +14,7 @@ public class GameConfiguration {
     }
 
     static int verticalLinesCount() {
-        return 20;
+        return 30;
     }
 
     static float squareLenght() {

@@ -62,4 +62,6 @@ public class Figure {
         }
         return false;
     }
+
+    public void rotate() {}
 }

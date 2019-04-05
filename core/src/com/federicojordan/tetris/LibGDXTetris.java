@@ -42,7 +42,11 @@ public class LibGDXTetris extends ApplicationAdapter {
 			@Override
 			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-				if(screenX < GameConfiguration.screenWidth() / 2) {
+				if(screenY < GameConfiguration.screenHeight() / 4) {
+					tryToRotate();
+				} else if(screenY > GameConfiguration.screenHeight() / 4 * 3) {
+					currentFigure.moveDown();
+				} else if(screenX < GameConfiguration.screenWidth() / 2) {
 					tryToMoveLeft();
 				} else {
 					tryToMoveRight();
@@ -52,6 +56,11 @@ public class LibGDXTetris extends ApplicationAdapter {
 			}
 
 		});
+	}
+
+	private void tryToRotate() {
+		Gdx.app.log(TAG, "try to rotate");
+		currentFigure.rotate();
 	}
 
 	private void tryToMoveRight() {

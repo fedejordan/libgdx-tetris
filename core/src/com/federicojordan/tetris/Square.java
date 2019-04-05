@@ -12,10 +12,12 @@ public class Square {
     private int y;
     private Texture texture;
     private String TAG = "Square";
+    private Color color;
 
     public Square(int x, int y, Color color) {
         this.x = x;
         this.y = y;
+        this.color = color;
 
         Pixmap squarePixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
         squarePixmap.setColor(color);
@@ -67,5 +69,9 @@ public class Square {
 
     public boolean isTouchingLeft(Square square) {
         return square.getX() == x - 1 && square.getY() == y;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }
